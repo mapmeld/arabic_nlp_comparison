@@ -4,3 +4,5 @@ arabic-sentiment-analysis
 arabic_nlp
 large-arabic-sentiment-analysis-resouces
 .DS_Store
+pos.txt
+neg.txt
