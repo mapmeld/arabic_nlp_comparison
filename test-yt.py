@@ -32,7 +32,7 @@ cursor = conn.cursor()
 cursor.execute("SELECT originid, tweetid, body \
     FROM combined \
     WHERE screenname != 'NetflixMENA' \
-    ORDER BY originid")
+    ORDER BY originid DESC")
 knownTweets = {}
 currentOrigin = None
 positives = 0
@@ -46,7 +46,7 @@ xo.write('tweetid,pos,neg,posSum,negSum\n')
 def processOrigin():
     print('Tweet %s has %d positives and %d negatives adding up to %d + vs %d -' %
         (currentOrigin, positives, negatives, posSum, negSum))
-    xo.write(','.join([currentOrigin, str(positives), str(negatives), str(posSum), str(negSum)]) + '\n')
+    xo.write(','.join([str(currentOrigin), str(positives), str(negatives), str(posSum), str(negSum)]) + '\n')
 
 for tweet in cursor.fetchall():
     origin = tweet[0]
@@ -54,7 +54,7 @@ for tweet in cursor.fetchall():
     body = tweet[2]
 
     # unique Tweets plz
-    if id in knownTweets or origin is None or id is None or body is None:
+    if id in knownTweets or origin is None or id is None or body is None or len(body.strip()) == 1:
         continue
     knownTweets[id] = True
 
@@ -76,14 +76,17 @@ for tweet in cursor.fetchall():
 
     if foundArabicScript:
         #print(body)
-        (posScore, negScore) = find_sentiment(body)
-        #print(feels)
-        posSum += posScore
-        negSum += negScore
-        if posScore > negScore:
-            positives += 1
-        elif negScore > posScore:
-            negatives += 1
+        try:
+            (posScore, negScore) = find_sentiment(body.strip())
+            #print(feels)
+            posSum += posScore
+            negSum += negScore
+            if posScore > negScore:
+                positives += 1
+            elif negScore > posScore:
+                negatives += 1
+        except:
+            print(body)
 
 # get the last Tweet in there
 if currentOrigin is not None:

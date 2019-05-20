@@ -8,7 +8,6 @@ Sample data is replies to Tweets from @NetflixMENA
 
 * https://github.com/hadyelsahar/large-arabic-sentiment-analysis-resouces
 * https://github.com/iamaziz/ar-embeddings
-* https://github.com/alexrutherford/arabic_nlp
 * https://github.com/motazsaad/arabic-sentiment-analysis
 * https://github.com/arghodayah/Youtube-Comments-Analyzer
 
