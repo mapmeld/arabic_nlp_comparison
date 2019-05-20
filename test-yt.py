@@ -8,9 +8,6 @@ sys.path.insert(0, './Youtube-Comments-Analyzer')
 os.system('cp ./Youtube-Comments-Analyzer/pos.txt ./')
 os.system('cp ./Youtube-Comments-Analyzer/neg.txt ./')
 
-# RegEx for Arabic lang check
-import re
-
 # import from YouTube-Comments-Analyzer
 # this also triggers one-time nltk_data download
 from sentiment import find_sentiment

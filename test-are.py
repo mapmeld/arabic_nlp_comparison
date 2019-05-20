@@ -4,6 +4,27 @@
 import sys
 sys.path.insert(0, './ar-embeddings')
 
+# pip3 install psycopg2
+import psycopg2
+conn = psycopg2.connect("dbname='tweetreplies'")
+cursor = conn.cursor()
+cursor.execute("SELECT originid, tweetid, body \
+    FROM combined \
+    WHERE screenname != 'NetflixMENA' \
+    ORDER BY originid DESC")
+knownTweets = {}
+tweetsByOrigin = {}
+currentOrigin = None
+for tweet in cursor.fetchall():
+    origin = str(tweet[0])
+    id = tweet[1]
+    body = tweet[2]
+
+    if origin not in tweetsByOrigin:
+        tweetsByOrigin[origin] = []
+    tweetsByOrigin[origin].append(body)
+
+import json
 from asa import ArSentiment
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import SGDClassifier, LogisticRegressionCV
@@ -23,6 +44,22 @@ classifiers = [
     LogisticRegressionCV(solver='liblinear'),
     GaussianNB(),
 ]
+originEvals = []
 for c in classifiers:
     learner.classify(c, False, False)
-    #predictions = c.predict(text_data)
+    scoresByOrigin = {}
+    for origin in tweetsByOrigin.keys():
+        scoresByOrigin[origin] = { 'positive': 0, 'negative': 0 }
+        tokenized = learner.tokenize_data(tweetsByOrigin[origin], 'experiment')
+        normalized = learner.average_feature_vectors(tokenized, 'experiment')
+        nanless = learner.remove_nan(normalized)
+        predictions = c.predict(nanless)
+        # negative = 0, positive = 1
+        for item in predictions:
+            if item == 0:
+                scoresByOrigin[origin]['negative'] += 1
+            else:
+                scoresByOrigin[origin]['positive'] += 1
+    originEvals.append(scoresByOrigin)
+oeout = open('./are-tweet-results.json', 'w')
+oeout.write(json.dumps(originEvals))
