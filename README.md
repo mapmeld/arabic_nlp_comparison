@@ -4,6 +4,8 @@ Data and scripts for working with Arabic Sentiment Analysis libraries
 
 Sample data is replies to Tweets from @NetflixMENA
 
+I did a write-up on https://medium.com/@mapmeld/sentiment-analysis-in-arabic-f08cd20a76d
+
 ## Tools
 
 * https://github.com/hadyelsahar/large-arabic-sentiment-analysis-resouces
