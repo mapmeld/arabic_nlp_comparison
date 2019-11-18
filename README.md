@@ -10,7 +10,7 @@ I did a write-up on https://medium.com/@mapmeld/sentiment-analysis-in-arabic-f08
 
 * https://github.com/hadyelsahar/large-arabic-sentiment-analysis-resouces
 * https://github.com/iamaziz/ar-embeddings
-* https://github.com/motazsaad/arabic-sentiment-analysis
+* https://github.com/motazsaad/arabic-sentiment-analysis (check out <a href="https://www.youtube.com/watch?list=PL39RMbpB79NMYriiWz3Ay90tEMPtl_FFv&v=l_v_EvUk_iU&feature=emb_logo">his Arabic-language NLP lectures</a>)
 * https://github.com/arghodayah/Youtube-Comments-Analyzer
 
 ## Background
