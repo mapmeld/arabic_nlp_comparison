@@ -1,12 +1,19 @@
-# Arabic Sentiment Analysis Review
+# Archiving
+
+This uses old methods before Arabic language transformers models were generally available
+
+- Check out Arabic BERT and GPT models at https://huggingface.co/models?filter=ar
+- Use arabert.preprocessing if you use an AUBMINDLAB model
+- Use the SimpleTransformers library for easier access
+- Check out AWS Comprehend for SaaS
+
+## Arabic Sentiment Analysis Review
 
 Data and scripts for working with Arabic Sentiment Analysis libraries
 
 Sample data is replies to Tweets from @NetflixMENA
 
 I did a write-up on https://medium.com/@mapmeld/sentiment-analysis-in-arabic-f08cd20a76d
-
-Check out AWS Comprehend or https://arabic-nlp.herokuapp.com/ for a more modern approach
 
 ## Tools
 
